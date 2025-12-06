@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquiles-Image | Documentation</title>
+    <!-- Favicon -->
+    <link rel="icon" href="https://res.cloudinary.com/dmtomxyvm/image/upload/v1765043556/aqui_kyhcn8.png" type="image/png">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Marked.js (Markdown Parser) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Highlight.js (Code Syntax Highlighting) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/bash.min.js"></script>
+
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            primary: '#E87A5D', /* Sunset Orange - Main Accent */
+                            secondary: '#C84C3C', /* Darker Red */
+                            bg: '#0b0c0f',      /* Deep Dark Background */
+                            surface: '#16181d', /* Slightly lighter for cards/sidebars */
+                            border: '#2e3138'   /* Border color */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    typography: (theme) => ({
+                        DEFAULT: {
+                            css: {
+                                color: '#9ca3af',
+                                a: {
+                                    color: theme('colors.brand.primary'),
+                                    textDecoration: 'none',
+                                    '&:hover': {
+                                        color: '#ffffff',
+                                    },
+                                },
+                                h1: { color: '#ffffff', fontWeight: '700' },
+                                h2: { color: '#e5e7eb', fontWeight: '600', marginTop: '2em' },
+                                h3: { color: '#d1d5db', fontWeight: '600', marginTop: '1.5em' },
+                                h4: { color: '#d1d5db' },
+                                strong: { color: '#ffffff' },
+                                code: {
+                                    color: '#e5e7eb',
+                                    backgroundColor: '#1f2937',
+                                    borderRadius: '0.25rem',
+                                    padding: '0.125rem 0.25rem',
+                                    fontWeight: '400',
+                                },
+                                'code::before': { content: '""' },
+                                'code::after': { content: '""' },
+                                pre: {
+                                    backgroundColor: '#16181d',
+                                    border: '1px solid #2e3138',
+                                    borderRadius: '0.5rem',
+                                },
+                                blockquote: {
+                                    borderLeftColor: theme('colors.brand.primary'),
+                                    color: '#9ca3af',
+                                    backgroundColor: 'rgba(232, 122, 93, 0.1)',
+                                    padding: '1rem',
+                                    borderRadius: '0.25rem',
+                                }
+                            },
+                        },
+                    }),
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4b5563; }
+        
+        html { scroll-behavior: smooth; }
+        body { background-color: #0b0c0f; }
+
+        /* Sidebar Link Active State */
+        .nav-link { border-left: 1px solid transparent; }
+        .nav-link.active {
+            color: #E87A5D;
+            border-left: 1px solid #E87A5D;
+            background: linear-gradient(90deg, rgba(232, 122, 93, 0.1) 0%, transparent 100%);
+        }
+        
+        /* TOC Active State */
+        .toc-link.active {
+            color: #E87A5D;
+            border-left: 1px solid #E87A5D;
+        }
+
+        /* Utility to hide elements but keep them accessible for screen readers/parsing */
+        .sr-only-parse {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        
+    </style>
+</head>
+<body class="text-gray-400 font-sans antialiased flex flex-col h-screen overflow-hidden selection:bg-brand-primary selection:text-white">
+
+    <!-- Top Navbar -->
+    <header class="h-14 bg-brand-bg/80 backdrop-blur-md border-b border-brand-border fixed top-0 w-full z-50 flex items-center justify-between px-4 lg:px-8">
+        <div class="flex items-center gap-3">
+            <button id="menu-btn" class="lg:hidden text-gray-400 hover:text-white">
+                <i data-lucide="menu" class="w-5 h-5"></i>
+            </button>
+            <a href="#" class="flex items-center gap-2">
+                <span class="font-semibold text-gray-200 tracking-tight">Aquiles-Image</span>
+            </a>
+        </div>
+
+        <!-- Search Bar (Desktop) -->
+        <div class="hidden md:flex flex-1 max-w-lg mx-8 relative">
+            <div class="relative w-full group">
+                <i data-lucide="search" class="absolute left-3 top-2 h-4 w-4 text-gray-500 group-focus-within:text-brand-primary transition-colors"></i>
+                <input type="text" id="search-input" placeholder="Search documentation..." 
+                    class="w-full bg-brand-surface border border-brand-border rounded-lg pl-9 pr-4 py-1.5 text-sm text-gray-200 placeholder-gray-500 focus:outline-none focus:border-brand-primary/50 focus:ring-1 focus:ring-brand-primary/50 transition-all">
+                <div class="absolute right-2 top-2 text-[10px] text-gray-600 border border-brand-border rounded px-1.5 hidden lg:block">Ctrl K</div>
+            </div>
+            <!-- Search Results Dropdown -->
+            <div id="search-results" class="hidden absolute top-full left-0 w-full bg-brand-surface border border-brand-border rounded-lg shadow-2xl mt-2 max-h-96 overflow-y-auto z-50 divide-y divide-brand-border"></div>
+        </div>
+
+        <div class="flex items-center gap-4">
+            <a href="https://github.com/Aquiles-ai/Aquiles-Image" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex flex-1 pt-14 h-full">
+        
+        <!-- Sidebar (Left Navigation) -->
+        <aside id="sidebar" class="w-64 bg-brand-bg border-r border-brand-border flex-shrink-0 h-full overflow-y-auto hidden lg:block fixed lg:relative z-40 transform transition-transform duration-300 -translate-x-full lg:translate-x-0 pb-10">
+            <div class="p-6">
+                <!-- Mobile Search -->
+                <div class="md:hidden mb-6 relative">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 h-4 w-4 text-gray-500"></i>
+                    <input type="text" id="mobile-search-input" placeholder="Search..." class="w-full bg-brand-surface border border-brand-border rounded-md pl-9 pr-3 py-2 text-sm text-gray-200">
+                </div>
+
+                <nav id="nav-container" class="space-y-8">
+                    <!-- Injected via JS -->
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="flex-1 overflow-y-auto relative scroll-smooth" id="main-scroll">
+            <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 py-10 flex gap-12">
+                
+                <!-- Center Content -->
+                <div class="flex-1 min-w-0 max-w-3xl mx-auto lg:mx-0">
+                    <div id="loader" class="hidden py-20 flex justify-center">
+                        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-brand-primary"></div>
+                    </div>
+                    
+                    <article id="content" class="prose prose-invert prose-headings:scroll-mt-20 max-w-none">
+                        <!-- Markdown Injected Here -->
+                    </article>
+
+                    <!-- Page Navigation (Prev/Next) -->
+                    <div class="mt-16 pt-8 border-t border-brand-border grid grid-cols-2 gap-4" id="page-nav">
+                        <!-- Injected via JS -->
+                    </div>
+
+                    <footer class="mt-16 text-sm text-gray-600">
+                        <p>© 2025 Aquiles-AI. Licensed under Apache 2.0 .</p>
+                    </footer>
+                </div>
+
+                <!-- Right Sidebar (Table of Contents) -->
+                <aside class="hidden xl:block w-64 flex-shrink-0">
+                    <div class="sticky top-10">
+                        <h5 class="text-xs font-semibold text-gray-200 uppercase tracking-wider mb-4">On this page</h5>
+                        <nav id="toc" class="border-l border-brand-border space-y-1">
+                            <!-- TOC Injected via JS -->
+                        </nav>
+                    </div>
+                </aside>
+            </div>
+        </main>
+
+        <!-- Mobile Overlay -->
+        <div id="overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 hidden lg:hidden"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/search.js"></script>
+    <script src="js/docs.js"></script>
+    <script>
+        lucide.createIcons();
+        
+        // Mobile Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function toggleMenu() {
+            sidebar.classList.toggle('-translate-x-full');
+            sidebar.classList.toggle('bg-brand-bg'); // Ensure bg is solid on mobile
+            sidebar.classList.toggle('fixed');
+            sidebar.classList.toggle('h-full');
+            sidebar.classList.toggle('top-14');
+            overlay.classList.toggle('hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+    </script>
+</body>
+</html>
