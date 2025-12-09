@@ -52,6 +52,11 @@ uv pip install diffusers
 uv pip install git+https://github.com/huggingface/diffusers.git
 ```
 
+**Option C: To run FLUX.1-Kontext-dev correctly, you must install this version**
+```bash
+uv pip install diffusers==0.36.0
+```
+
 > **Important:** If you plan to use **FLUX.2** or **Z-Image-Turbo** models, you **must** install from source (Option B).
 
 #### 5. Install Aquiles-Image
