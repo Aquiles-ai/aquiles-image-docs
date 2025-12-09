@@ -5,19 +5,21 @@ const routes = {
     '#installation': 'docs/installation.md',
     '#server': 'docs/server.md',
     '#dev-mode': 'docs/dev-mode.md',
+    '#modal-deployment': 'docs/modal-deployment.md',
     '#client-api': 'docs/client-api.md',
     '#models': 'docs/models.md'
 };
 
 
 const routeOrder = [
-    '#introduction', '#installation', '#server', '#dev-mode', '#client-api', '#models'
+    '#introduction', '#installation', '#server', '#dev-mode', '#modal-deployment', '#client-api', '#models'
 ];
 const routeTitles = {
     '#introduction': 'Introduction',
     '#installation': 'Installation',
     '#server': 'Launch Server',
     '#dev-mode': 'Dev Mode',
+    '#modal-deployment': 'Modal Deployment',
     '#client-api': 'Python Client',
     '#models': 'Supported Models'
 };
@@ -30,7 +32,8 @@ const navStructure = [
     ]},
     { title: 'Guides', items: [
         { label: 'Launch Server', hash: '#server' },
-        { label: 'Dev Mode', hash: '#dev-mode' }
+        { label: 'Dev Mode', hash: '#dev-mode' },
+        { label: 'Deployment in Modal', hash: '#modal-deployment' }
     ]},
     { title: 'API Reference', items: [
         { label: 'Python Client', hash: '#client-api' },

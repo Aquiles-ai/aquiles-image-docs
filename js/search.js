@@ -9,6 +9,7 @@ const searchIndex = [
     { title: "Prerequisites", hash: "#installation", category: "Getting Started", snippet: "Python 3.8+, CUDA GPU, VRAM requirements." },
     { title: "Launch Server", hash: "#server", category: "Guides", snippet: "CLI commands, hosting, port configuration." },
     { title: "Dev Mode", hash: "#dev-mode", category: "Guides", snippet: "Run without GPU, mock endpoints for testing." },
+    { title: "Modal Deployment", hash: "#modal-deployment", category: "Guides", snippet: "Deploy serverless GPU inference on Modal." },
     { title: "Python Client", hash: "#client-api", category: "API", snippet: "OpenAI compatible client usage example." },
     { title: "Supported Models", hash: "#models", category: "API", snippet: "Stable Diffusion 3.5, FLUX, VRAM usage." },
 ];
