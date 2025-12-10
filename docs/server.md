@@ -150,6 +150,8 @@ aquiles-image serve \
   --device-map "cuda"
 ```
 
+> **Note**: Depending on the model that is loaded, that will be the endpoint that is available.
+
 ### Configuration Persistence
 
 Aquiles-Image saves your configuration automatically. Once you've configured your server, you can start it without repeating all options:
