@@ -499,18 +499,40 @@ modal secret create huggingface-secret HF_TOKEN=hf_your_new_token
 )
 ```
 
-## Video Generation with wan2.2
+## Video Generation with wan2.2 and wan2.2-turbo
 
-> ⚠️ **High Inference Times & Costs**: Video generation with wan2.2 has significantly longer inference times compared to image generation (typically 5-25 minutes per video). This model requires **NVIDIA H100 GPUs minimum** and will incur substantial compute costs. Monitor your usage carefully and consider longer scale-down windows to avoid frequent cold starts.
+> ⚠️ **High Inference Times & Costs**: Video generation has significantly longer inference times compared to image generation. The **wan2.2** model takes ~30 minutes per video (40 steps), while **wan2.2-turbo** takes ~3 minutes (4 steps) with equivalent quality. Both models require **NVIDIA H100/A100-80GB GPUs minimum** and will incur substantial compute costs. Monitor your usage carefully and consider longer scale-down windows to avoid frequent cold starts.
 
 ### Overview
 
-The wan2.2 model enables text-to-video generation through Aquiles-Image. Unlike image generation which completes in seconds, video generation is a compute-intensive process that requires:
+The wan2.2 family of models enables text-to-video generation through Aquiles-Image. Unlike image generation which completes in seconds, video generation is a compute-intensive process with two model options:
 
-- **Minimum GPU**: NVIDIA H100 (80GB VRAM)
-- **Typical inference time**: 5-25 minutes per video
+| Model | Inference Time | Steps | Quality | Best For |
+|-------|----------------|-------|---------|----------|
+| **wan2.2** | ~30 min/video | 40 | High | Maximum quality, less time-sensitive workflows |
+| **wan2.2-turbo** ⚡ | ~3 min/video | 4 | High (equivalent) | **Production use, faster iteration, cost optimization** |
+
+### Requirements
+
+- **Minimum GPU**: NVIDIA H100 or A100-80GB (80GB VRAM)
+- **Typical inference time**: 
+  - wan2.2: 28-30 minutes per video
+  - wan2.2-turbo: 3-5 minutes per video
 - **Recommended concurrency**: 1 request at a time
-- **Scale-down window**: 30+ minutes to minimize cold starts
+- **Scale-down window**: 
+  - wan2.2: 30+ minutes to minimize cold starts
+  - wan2.2-turbo: 10-15 minutes (faster turnaround)
+
+### Recommendation
+
+**For most use cases, `wan2.2-turbo` is the recommended choice:**
+- ✅ 9.5x faster inference (3 min vs 30 min)
+- ✅ Same output quality in production testing
+- ✅ 10x lower compute costs per video
+- ✅ Better user experience (no timeouts)
+- ✅ Higher throughput (~18 videos/hour vs ~2 videos/hour)
+
+Use `wan2.2` only if you have specific quality requirements that cannot be met by the turbo variant.
 
 ### Deployment Configuration
 
@@ -543,7 +565,7 @@ aquiles_image = (
     })  
 )
 
-MODEL_NAME = "wan2.2"
+MODEL_NAME = "wan2.2" # or wan2.2-turbo
 
 # Persistent volumes for caching
 hf_cache_vol = modal.Volume.from_name("huggingface-cache", create_if_missing=True)

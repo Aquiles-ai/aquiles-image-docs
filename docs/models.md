@@ -45,14 +45,16 @@ Models that edit existing images with text guidance via the `/images/edits` endp
 
 Models that generate videos from text prompts via the `/videos` endpoint:
 
-| Model | HuggingFace Link | GPU Requirement | Notes |
-|-------|------------------|-----------------|-------|
-| `wan2.2` | [🤗 Link](https://huggingface.co/Wan-AI/Wan2.2-T2V-A14B) | 80GB VRAM | Requires H100 or A100-80GB |
+| Model | HuggingFace Link | GPU Requirement | Speed | Notes |
+|-------|------------------|-----------------|-------|-------|
+| `wan2.2` | [🤗 Link](https://huggingface.co/Wan-AI/Wan2.2-T2V-A14B) | 80GB VRAM | ~30 min/video | High quality, 40 inference steps |
+| `wan2.2-turbo` | [🤗 Link](https://huggingface.co/Aquiles-ai/Wan2.2-Turbo) | 80GB VRAM | ⚡ ~3 min/video | **9.5x faster** - Same quality in 4 steps! |
 
 **Video generation requirements:**
 - Minimum 80GB VRAM (NVIDIA H100 or A100-80GB)
-- Generation takes several minutes
+- Generation time varies by model (see table above)
 - Uses polling API for status updates
+- Both models produce equivalent quality output
 
 ---
 
