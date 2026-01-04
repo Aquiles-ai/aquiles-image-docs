@@ -71,20 +71,208 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 >    rainforest light, faint humidity haze, and subtle film grain. The moss texture and background greenery should 
 >    remain consistent, with the chameleon's deliberate gait flowing naturally as if no cut occurred.
 
-| Model | Output Video |
-|-------|--------------|
-| `wan2.2` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=video_modal_deploy_aftsi6&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `wan2.2-turbo` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_2_turbo_th0wcl&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `wan2.1-turbo-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_turbo_fp8_lj7woy&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `wan2.1` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_base_14b_kc2f9e&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `wan2.1-turbo` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_turbo_gw2u7j&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `wan2.1-3B` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_3B_qimtse&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `hunyuanVideo-1.5-480p` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_st_kj9abu&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `hunyuanVideo-1.5-480p-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_fp8_j440gb&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `hunyuanVideo-1.5-480p-turbo` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_turbo_fnkwwy&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `hunyuanVideo-1.5-480p-turbo-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_turbo_fp8_mthiiq&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `hunyuanVideo-1.5-720p` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuanvideo_720_n3nznq&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `hunyuanVideo-1.5-720p-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuanvideo-720p-fp8_vc3str&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #2d2d2d;">
+      <th style="padding: 16px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid #404040;">Model</th>
+      <th style="padding: 16px; text-align: center; font-size: 18px; font-weight: 600; border: 1px solid #404040;">Output Video</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        wan2.2
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=video_modal_deploy_aftsi6&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        wan2.2-turbo
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_2_turbo_th0wcl&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        wan2.1-turbo-fp8
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_turbo_fp8_lj7woy&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        wan2.1
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_base_14b_kc2f9e&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        wan2.1-turbo
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_turbo_gw2u7j&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        wan2.1-3B
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_3B_qimtse&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        hunyuanVideo-1.5-480p
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_st_kj9abu&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        hunyuanVideo-1.5-480p-fp8
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_fp8_j440gb&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        hunyuanVideo-1.5-480p-turbo
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_turbo_fnkwwy&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        hunyuanVideo-1.5-480p-turbo-fp8
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_turbo_fp8_mthiiq&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        hunyuanVideo-1.5-720p
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuanvideo_720_n3nznq&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        hunyuanVideo-1.5-720p-fp8
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuanvideo-720p-fp8_vc3str&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 **Video generation requirements:**
 - Minimum 80GB VRAM (NVIDIA H100 or A100-80GB)
