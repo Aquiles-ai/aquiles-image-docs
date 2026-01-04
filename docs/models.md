@@ -49,18 +49,18 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 
 | Model | HuggingFace Link | GPU Requirement | Inference Time | End-to-End Time | Peak VRAM | Notes |
 |-------|------------------|-----------------|----------------|-----------------|-----------|-------|
-| `wan2.1-turbo-fp8` | TBD | <80GB VRAM | 32 seconds | 38 seconds | 30.09 GB | Fast, FP8 quantized, 4 steps |
-| `wan2.1-14B` | TBD | ~50GB VRAM | 21 min 16 sec | 21 min 24 sec | 49.95 GB | High quality, 40 inference steps |
-| `wan2.1-turbo` | TBD | ~43GB VRAM | ~33 seconds | ~39 seconds | 42.74 GB | Fast turbo variant, 4 steps |
-| `wan2.1-3B` | TBD | ~16GB VRAM | 1 min 3 sec | 1 min 8 sec | 15.78 GB | Lightweight model, 40 steps |
+| `wan2.1-turbo-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/Wan2.1-Turbo-fp8) | <80GB VRAM | 32 seconds | 38 seconds | 30.09 GB | Fast, FP8 quantized, 4 steps |
+| `wan2.1` | [🤗 Link](https://huggingface.co/Wan-AI/Wan2.1-T2V-14B) | ~50GB VRAM | 21 min 16 sec | 21 min 24 sec | 49.95 GB | High quality, 40 inference steps |
+| `wan2.1-turbo` | [🤗 Link](https://huggingface.co/Aquiles-ai/Wan2.1-Turbo) | ~43GB VRAM | ~33 seconds | ~39 seconds | 42.74 GB | Fast turbo variant, 4 steps |
+| `wan2.1-3B` | [🤗 Link](https://huggingface.co/Wan-AI/Wan2.1-T2V-1.3B) | ~16GB VRAM | 1 min 3 sec | 1 min 8 sec | 15.78 GB | Lightweight model, 40 steps |
 | `wan2.2` | [🤗 Link](https://huggingface.co/Wan-AI/Wan2.2-T2V-A14B) | ~80GB VRAM | ~30 minutes | ~30 min 35 sec | ~77 GB | High quality, 40 inference steps |
 | `wan2.2-turbo` | [🤗 Link](https://huggingface.co/Aquiles-ai/Wan2.2-Turbo) | ~80GB VRAM | ⚡ ~3 minutes | ~3 min 15 sec | ~77 GB | **9.5x faster** - Same quality in 4 steps! |
-| `hunyuanVideo-1.5-480p` | TBD | ~57GB VRAM | 6 min 4 sec | 6 min 22 sec | 56.51 GB | 480p resolution, 50 steps |
-| `hunyuanVideo-1.5-480p-fp8` | TBD | ~49GB VRAM | 5 min 57 sec | 6 min 14 sec | 48.93 GB | 480p FP8 quantized, 50 steps |
-| `hunyuanVideo-1.5-480p-turbo` | TBD | ~49GB VRAM | ⚡ 8 seconds | 17 seconds | 48.82 GB | **Ultra fast** 480p turbo, 4 steps |
-| `hunyuanVideo-1.5-480p-turbo-fp8` | TBD | ~41GB VRAM | ⚡ 8 seconds | 20 seconds | 40.76 GB | **Ultra fast** 480p turbo FP8, 4 steps |
-| `hunyuanVideo-1.5-720p` | TBD | ~57GB VRAM | 25 min 53 sec | 26 min 48 sec | 56.56 GB | 720p resolution, 50 steps |
-| `hunyuanVideo-1.5-720p-fp8` | TBD | ~49GB VRAM | 25 min 50 sec | 26 min 45 sec | 48.98 GB | 720p FP8 quantized, 50 steps |
+| `hunyuanVideo-1.5-480p` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-480p) | ~57GB VRAM | 6 min 4 sec | 6 min 22 sec | 56.51 GB | 480p resolution, 50 steps |
+| `hunyuanVideo-1.5-480p-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-480p-fp8) | ~49GB VRAM | 5 min 57 sec | 6 min 14 sec | 48.93 GB | 480p FP8 quantized, 50 steps |
+| `hunyuanVideo-1.5-480p-turbo` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-480p-Turbo) | ~49GB VRAM | ⚡ 8 seconds | 17 seconds | 48.82 GB | **Ultra fast** 480p turbo, 4 steps |
+| `hunyuanVideo-1.5-480p-turbo-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-480p-Turbo-fp8) | ~41GB VRAM | ⚡ 8 seconds | 20 seconds | 40.76 GB | **Ultra fast** 480p turbo FP8, 4 steps |
+| `hunyuanVideo-1.5-720p` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-720p) | ~57GB VRAM | 25 min 53 sec | 26 min 48 sec | 56.56 GB | 720p resolution, 50 steps |
+| `hunyuanVideo-1.5-720p-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-720p-fp8) | ~49GB VRAM | 25 min 50 sec | 26 min 45 sec | 48.98 GB | 720p FP8 quantized, 50 steps |
 
 #### Output Examples
 
@@ -74,17 +74,17 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 | Model | Output Video |
 |-------|--------------|
 | `wan2.2` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=video_modal_deploy_aftsi6&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
-| `wan2.2-turbo` | TBD |
-| `wan2.1-turbo-fp8` | TBD |
-| `wan2.1-14B` | TBD |
-| `wan2.1-turbo` | TBD |
-| `wan2.1-3B` | TBD |
-| `hunyuanVideo-1.5-480p` | TBD |
-| `hunyuanVideo-1.5-480p-fp8` | TBD |
-| `hunyuanVideo-1.5-480p-turbo` | TBD |
-| `hunyuanVideo-1.5-480p-turbo-fp8` | TBD |
-| `hunyuanVideo-1.5-720p` | TBD |
-| `hunyuanVideo-1.5-720p-fp8` | TBD |
+| `wan2.2-turbo` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_2_turbo_th0wcl&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `wan2.1-turbo-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_turbo_fp8_lj7woy&profile=cld-default"" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `wan2.1` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_base_14b_kc2f9e&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `wan2.1-turbo` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_turbo_gw2u7j&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `wan2.1-3B` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=wan2_1_3B_qimtse&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `hunyuanVideo-1.5-480p` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_st_kj9abu&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `hunyuanVideo-1.5-480p-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_fp8_j440gb&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `hunyuanVideo-1.5-480p-turbo` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_turbo_fnkwwy&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `hunyuanVideo-1.5-480p-turbo-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuan_480p_turbo_fp8_mthiiq&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `hunyuanVideo-1.5-720p` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuanvideo_720_n3nznq&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
+| `hunyuanVideo-1.5-720p-fp8` | <iframe src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuanvideo-720p-fp8_vc3str&profile=cld-default" width="100%" height="400" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen frameborder="0"></iframe> |
 
 **Video generation requirements:**
 - Minimum 80GB VRAM (NVIDIA H100 or A100-80GB)
