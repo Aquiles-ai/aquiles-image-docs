@@ -51,6 +51,7 @@ Models that edit existing images with text guidance via the `/images/edits` endp
   <img class="modal-content" id="modalImage">
 </div>
 
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
   <div style="text-align: center;">
     <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555903/image_a_brown_dog_playing_in_the_park_flux2_7_2_yunwiy.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
