@@ -4,7 +4,7 @@
 
 <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1763763684/aquiles_image_m6ej7u.png" alt="Aquiles-Image Logo" class="w-full rounded-xl shadow-lg my-6"/>
 
-### **Easy, fast and cheap Diffusion Models that work for everyone.**
+### **A high-performance, memory-efficient inference server for diffusion models, compatible with the OpenAI client**
 
 *🚀 FastAPI • Diffusers • Compatible with the OpenAI client*
 
@@ -16,8 +16,9 @@ Aquiles-Image is a production-ready API server that brings state-of-the-art imag
 
 ### Key Features
 
-- **🔌 OpenAI Compatible** - Drop-in replacement for OpenAI's image APIs. Use the official OpenAI client library.
-- **⚡ Optimized Performance** - 3x faster inference with advanced optimizations.
-- **🎨 Multiple Models** - Support for FLUX.1, FLUX.2, SD3.5, and 10+ other models out of the box.
-- **🛠️ Developer Friendly** - Simple CLI, dev mode for testing, and comprehensive documentation.
-- **🎬 Video Generation** - Experimental support for text-to-video generation (Wan2.2).
+- **🔌 OpenAI Compatible** - Use the official OpenAI client with zero code changes
+- **⚡ Intelligent Batching** - Automatic request grouping by shared parameters for maximum throughput on single or multi-GPU setups
+- **🎨 30+ Optimized Models** - 18 image (FLUX, SD3.5, Qwen) + 12 video models (Wan2.x, HunyuanVideo) + unlimited via AutoPipeline (Only T2I)
+- **🚀 Multi-GPU Support** - Distributed inference with dynamic load balancing across GPUs (image models) for horizontal scaling
+- **🛠️ Superior DevX** - Simple CLI, dev mode for testing, built-in monitoring
+- **🎬 Advanced Video** - Text-to-video with Wan2.x and HunyuanVideo series (+ Turbo variants)

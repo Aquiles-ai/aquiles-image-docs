@@ -80,6 +80,34 @@ client = OpenAI(
 - **Description:** Block new requests when max concurrent inferences is reached
 - **Example:** `--block-request`
 
+**`--dist-inference / --no-dist-inference`**
+- **Default:** `None`
+- **Type:** Flag
+- **Description:** Enable distributed inference mode for load balancing across multiple workers/devices
+- **Note:** Batch inference is always active in both single-device and distributed modes
+- **Example:** `--dist-inference`
+
+**`--max-batch-size`**
+- **Default:** `None`
+- **Type:** Integer
+- **Description:** Maximum number of requests to group in a single batch for inference (applies to both single-device and distributed modes)
+- **Use case:** Optimize GPU utilization by processing multiple requests together
+- **Example:** `--max-batch-size 8`
+
+**`--batch-timeout`**
+- **Default:** `None`
+- **Type:** Float
+- **Description:** Maximum time (in seconds) to wait before processing a batch even if not full (applies to both single-device and distributed modes)
+- **Use case:** Balance between batch efficiency and response latency
+- **Example:** `--batch-timeout 0.5`
+
+**`--worker-sleep`**
+- **Default:** `None`
+- **Type:** Float
+- **Description:** Time (in seconds) the worker sleeps between checking for new batch requests (applies to both single-device and distributed modes)
+- **Use case:** Fine-tune CPU usage and batch processing frequency
+- **Example:** `--worker-sleep 0.1`
+
 #### Development Options
 
 **`--no-load-model`**
@@ -108,6 +136,30 @@ aquiles-image serve \
   --api-key "prod-secret-key-2024" \
   --max-concurrent-infer 5 \
   --block-request
+```
+
+#### Single-Device Server with Optimized Batching
+```bash
+aquiles-image serve \
+  --host "0.0.0.0" \
+  --port 5500 \
+  --model "stabilityai/stable-diffusion-3.5-medium" \
+  --max-batch-size 8 \
+  --batch-timeout 0.5 \
+  --worker-sleep 0.1 \
+  --max-concurrent-infer 10
+```
+
+#### Distributed Inference Server
+```bash
+aquiles-image serve \
+  --host "0.0.0.0" \
+  --port 5500 \
+  --model "stabilityai/stable-diffusion-3.5-medium" \
+  --dist-inference \
+  --max-batch-size 8 \
+  --batch-timeout 0.5 \
+  --worker-sleep 0.1
 ```
 
 #### Development Server
@@ -150,7 +202,19 @@ aquiles-image serve \
   --device-map "cuda"
 ```
 
+#### Distributed Inference with Custom Batch Settings
+```bash
+aquiles-image serve \
+  --model "black-forest-labs/FLUX.1-dev" \
+  --dist-inference \
+  --max-batch-size 16 \
+  --batch-timeout 1.0 \
+  --worker-sleep 0.05
+```
+
 > **Note**: Depending on the model that is loaded, that will be the endpoint that is available.
+> 
+> **Batch Processing**: Batch inference is always enabled for optimal performance. The `--max-batch-size`, `--batch-timeout`, and `--worker-sleep` options allow you to fine-tune batch processing behavior in both single-device and distributed modes.
 
 ### Configuration Persistence
 
@@ -170,6 +234,12 @@ aquiles-image serve --model "black-forest-labs/FLUX.1-dev"
 
 # Change only the port
 aquiles-image serve --port 8000
+
+# Enable distributed inference mode
+aquiles-image serve --dist-inference
+
+# Adjust batch processing parameters (works in both single-device and distributed modes)
+aquiles-image serve --max-batch-size 12 --batch-timeout 0.8
 ```
 
 ### Verifying Server Status
@@ -235,6 +305,21 @@ aquiles-image serve --api-key "correct-key"
 **Out of Memory**
 ```bash
 # Try a smaller model or quantized version
-aquiles-image serve --model "black-forest-labs/FLUX.1-schnell"
+aquiles-image serve --model "stabilityai/stable-diffusion-3.5-medium"
 aquiles-image serve --model "diffusers/FLUX.2-dev-bnb-4bit" --device-map "cuda"
+```
+
+**Batch Processing Performance**
+```bash
+# Batch inference is always active. If experiencing high latency, reduce batch timeout
+aquiles-image serve --batch-timeout 0.3
+
+# If GPU utilization is low, increase batch size
+aquiles-image serve --max-batch-size 16
+
+# Fine-tune worker sleep for optimal balance
+aquiles-image serve --worker-sleep 0.05
+
+# For distributed workloads across multiple devices/workers
+aquiles-image serve --dist-inference --max-batch-size 16
 ```
