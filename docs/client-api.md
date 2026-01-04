@@ -91,7 +91,7 @@ print("Image edited successfully!")
 
 > ⚠️ **Note**: Remember to use `diffusers==0.36.0` for FLUX.1-Kontext-dev to avoid errors.
 
-#### Video Generation (Experimental)
+#### Video Generation
 
 Generate videos from text prompts using the Wan2.2 model:
 
@@ -237,7 +237,356 @@ if __name__ == "__main__":
 - Video generation can take several minutes to complete
 - The script polls the server for progress updates
 - Includes automatic retry logic for downloads
-- Model: `wan2.2` (Wan-AI/Wan2.2-T2V-A14B)
+
+
+## 📊 Monitoring & Stats
+
+Aquiles-Image provides a custom `/stats` endpoint for real-time monitoring of your server's performance and resource utilization.
+
+### Python Example
+
+```python
+import requests
+
+# Basic stats request
+def get_server_stats(base_url, api_key=None):
+    """Retrieve server statistics from Aquiles-Image."""
+    headers = {}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    
+    response = requests.get(f"{base_url}/stats", headers=headers)
+    response.raise_for_status()
+    return response.json()
+
+# Usage
+base_url = "http://localhost:5500"
+api_key = "YOUR_API_KEY"  # Optional, only if server requires authentication
+
+try:
+    stats = get_server_stats(base_url, api_key)
+    
+    # Display basic metrics
+    print(f"Total requests: {stats.get('total_requests', stats.get('total_tasks', 0))}")
+    print(f"Queued: {stats['queued']}")
+    print(f"Completed: {stats['completed']}")
+    print(f"Failed: {stats['failed']}")
+    print(f"Server available: {stats['available']}")
+    
+    # For image models, show additional metrics
+    if 'total_images' in stats:
+        print(f"Total images generated: {stats['total_images']}")
+        print(f"Total batches: {stats['total_batches']}")
+    
+    # For distributed mode, show device-specific stats
+    if stats.get('mode') == 'distributed':
+        print("\nDevice Statistics:")
+        for device_id, device_stats in stats['devices'].items():
+            print(f"\n  {device_id}:")
+            print(f"    Available: {device_stats['available']}")
+            print(f"    Processing: {device_stats['processing']}")
+            print(f"    Images completed: {device_stats['images_completed']}")
+            print(f"    Avg batch time: {device_stats['avg_batch_time']:.2f}s")
+            print(f"    Estimated load: {device_stats['estimated_load']:.2%}")
+            
+except requests.exceptions.RequestException as e:
+    print(f"X Error fetching stats: {e}")
+```
+
+### JavaScript/TypeScript Example
+
+```typescript
+// TypeScript/JavaScript example
+interface ServerStats {
+  mode?: 'single-device' | 'distributed';
+  total_requests?: number;
+  total_tasks?: number;
+  total_batches?: number;
+  total_images?: number;
+  queued: number;
+  completed: number;
+  failed: number;
+  processing?: boolean;
+  available: boolean;
+  devices?: Record<string, DeviceStats>;
+  global?: GlobalStats;
+}
+
+interface DeviceStats {
+  id: string;
+  available: boolean;
+  processing: boolean;
+  can_accept_batch: boolean;
+  batch_size: number;
+  max_batch_size: number;
+  images_processing: number;
+  images_completed: number;
+  total_batches_processed: number;
+  avg_batch_time: number;
+  estimated_load: number;
+  error_count: number;
+  last_error: string | null;
+}
+
+interface GlobalStats {
+  total_requests: number;
+  total_batches: number;
+  total_images: number;
+  queued: number;
+  active_batches: number;
+  completed: number;
+  failed: number;
+  processing: boolean;
+}
+
+async function getServerStats(
+  baseUrl: string, 
+  apiKey?: string
+): Promise<ServerStats> {
+  const headers: Record<string, string> = {};
+  
+  if (apiKey) {
+    headers['Authorization'] = `Bearer ${apiKey}`;
+  }
+  
+  const response = await fetch(`${baseUrl}/stats`, { headers });
+  
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+  
+  return await response.json();
+}
+
+// Usage
+const baseUrl = 'http://localhost:5500';
+const apiKey = 'YOUR_API_KEY'; // Optional
+
+try {
+  const stats = await getServerStats(baseUrl, apiKey);
+  
+  console.log(`Total requests: ${stats.total_requests || stats.total_tasks || 0}`);
+  console.log(`Queued: ${stats.queued}`);
+  console.log(`Completed: ${stats.completed}`);
+  console.log(`Failed: ${stats.failed}`);
+  console.log(`Server available: ${stats.available}`);
+  
+  // For image models
+  if (stats.total_images !== undefined) {
+    console.log(`Total images generated: ${stats.total_images}`);
+    console.log(`Total batches: ${stats.total_batches}`);
+  }
+  
+  // For distributed mode
+  if (stats.mode === 'distributed' && stats.devices) {
+    console.log('\nDevice Statistics:');
+    
+    for (const [deviceId, deviceStats] of Object.entries(stats.devices)) {
+      console.log(`\n  ${deviceId}:`);
+      console.log(`    Available: ${deviceStats.available}`);
+      console.log(`    Processing: ${deviceStats.processing}`);
+      console.log(`    Images completed: ${deviceStats.images_completed}`);
+      console.log(`    Avg batch time: ${deviceStats.avg_batch_time.toFixed(2)}s`);
+      console.log(`    Estimated load: ${(deviceStats.estimated_load * 100).toFixed(1)}%`);
+    }
+  }
+  
+} catch (error) {
+  console.error('X Error fetching stats:', error);
+}
+```
+
+### Response Formats
+
+The response varies depending on the model type and configuration:
+
+#### Image Models - Single-Device Mode
+
+```json
+{
+  "mode": "single-device",
+  "total_requests": 150,
+  "total_batches": 42,
+  "total_images": 180,
+  "queued": 3,
+  "completed": 147,
+  "failed": 0,
+  "processing": true,
+  "available": false
+}
+```
+
+#### Image Models - Distributed Mode (Multi-GPU)
+
+```json
+{
+  "mode": "distributed",
+  "devices": {
+    "cuda:0": {
+      "id": "cuda:0",
+      "available": true,
+      "processing": false,
+      "can_accept_batch": true,
+      "batch_size": 4,
+      "max_batch_size": 8,
+      "images_processing": 0,
+      "images_completed": 45,
+      "total_batches_processed": 12,
+      "avg_batch_time": 2.5,
+      "estimated_load": 0.3,
+      "error_count": 0,
+      "last_error": null
+    },
+    "cuda:1": {
+      "id": "cuda:1",
+      "available": true,
+      "processing": true,
+      "can_accept_batch": false,
+      "batch_size": 2,
+      "max_batch_size": 8,
+      "images_processing": 2,
+      "images_completed": 38,
+      "total_batches_processed": 10,
+      "avg_batch_time": 2.8,
+      "estimated_load": 0.7,
+      "error_count": 0,
+      "last_error": null
+    }
+  },
+  "global": {
+    "total_requests": 150,
+    "total_batches": 42,
+    "total_images": 180,
+    "queued": 3,
+    "active_batches": 1,
+    "completed": 147,
+    "failed": 0,
+    "processing": true
+  }
+}
+```
+
+#### Video Models
+
+```json
+{
+  "total_tasks": 25,
+  "queued": 2,
+  "processing": 1,
+  "completed": 20,
+  "failed": 2,
+  "available": false,
+  "max_concurrent": 1
+}
+```
+
+### Key Metrics Explained
+
+- **`total_requests/tasks`** - Total number of generation requests received
+- **`total_images`** - Total images generated (image models only)
+- **`total_batches`** - Total batches processed (image models only)
+- **`queued`** - Requests waiting to be processed
+- **`processing`** - Currently processing requests
+- **`completed`** - Successfully completed requests
+- **`failed`** - Failed requests
+- **`available`** - Whether server can accept new requests
+- **`mode`** - Operation mode for image models: `single-device` or `distributed`
+
+#### Distributed Mode Specific Metrics
+
+- **`can_accept_batch`** - Whether device can accept new batch
+- **`batch_size`** - Current number of images in batch
+- **`max_batch_size`** - Maximum configured batch size
+- **`images_processing`** - Images currently being processed
+- **`images_completed`** - Total images completed on this device
+- **`avg_batch_time`** - Average time to process a batch (seconds)
+- **`estimated_load`** - Estimated load on device (0.0 to 1.0)
+- **`error_count`** - Number of errors encountered
+- **`last_error`** - Last error message if any
+
+### Monitoring Dashboard Example
+
+Here's a complete example of a monitoring function that periodically checks server stats:
+
+```python
+import requests
+import time
+from datetime import datetime
+
+def monitor_server(base_url, api_key=None, interval=5):
+    """
+    Monitor server statistics in real-time.
+    
+    Args:
+        base_url: Base URL of Aquiles-Image server
+        api_key: Optional API key for authentication
+        interval: Polling interval in seconds
+    """
+    headers = {}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
+    
+    print("Starting server monitoring... (Press Ctrl+C to stop)\n")
+    
+    try:
+        while True:
+            try:
+                response = requests.get(f"{base_url}/stats", headers=headers)
+                response.raise_for_status()
+                stats = response.json()
+                
+                timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                print(f"\n[{timestamp}]")
+                print("-" * 50)
+                
+                if stats.get('mode') == 'distributed':
+                    # Distributed mode monitoring
+                    global_stats = stats.get('global', {})
+                    print(f"Mode: Distributed")
+                    print(f"Total: {global_stats.get('total_requests', 0)} | "
+                          f"Queued: {global_stats.get('queued', 0)} | "
+                          f"Completed: {global_stats.get('completed', 0)} | "
+                          f"Failed: {global_stats.get('failed', 0)}")
+                    
+                    print("\nDevices:")
+                    for device_id, device in stats.get('devices', {}).items():
+                        status = "🟢" if device['available'] else "🔴"
+                        processing_indicator = "⚙️" if device['processing'] else "✓"
+                        print(f"  {status} {device_id} {processing_indicator}")
+                        print(f"    Load: {device['estimated_load']:.1%} | "
+                              f"Completed: {device['images_completed']} | "
+                              f"Avg Time: {device['avg_batch_time']:.2f}s")
+                else:
+                    # Single-device or video model monitoring
+                    total = stats.get('total_requests', stats.get('total_tasks', 0))
+                    print(f"Total: {total} | "
+                          f"Queued: {stats['queued']} | "
+                          f"Completed: {stats['completed']} | "
+                          f"Failed: {stats['failed']}")
+                    
+                    if 'total_images' in stats:
+                        print(f"Images: {stats['total_images']} | "
+                              f"Batches: {stats['total_batches']}")
+                    
+                    status = "🟢 Available" if stats['available'] else "🔴 Busy"
+                    print(f"Status: {status}")
+                
+            except requests.exceptions.RequestException as e:
+                print(f"X Error fetching stats: {e}")
+            
+            time.sleep(interval)
+            
+    except KeyboardInterrupt:
+        print("\n\nMonitoring stopped.")
+
+# Usage
+if __name__ == "__main__":
+    monitor_server(
+        base_url="http://localhost:5500",
+        api_key="YOUR_API_KEY",  # Optional
+        interval=5
+    )
+```
 
 ### Using Other SDKs
 
@@ -288,11 +637,12 @@ For other languages, check the [OpenAI SDK documentation](https://platform.opena
 
 | Endpoint | Method | Purpose | Compatible Models |
 |----------|--------|---------|-------------------|
-| `/images/generations` | POST | Generate images from text | All FLUX, SD3.5, Z-Image-Turbo |
-| `/images/edits` | POST | Edit existing images | FLUX.1-Kontext-dev, FLUX.2-dev-bnb-4bit |
-| `/videos` | POST | Generate videos from text | wan2.2 |
-| `/videos/{video_id}` | GET | Check video generation status | wan2.2 |
-| `/videos/{video_id}/content` | GET | Download generated video | wan2.2 |
+| `/images/generations` | POST | Generate images from text | All FLUX, SD3.5, Z-Image-Turbo, etc. |
+| `/images/edits` | POST | Edit existing images | FLUX.1-Kontext-dev, FLUX.2-dev-bnb-4bit, etc. |
+| `/videos` | POST | Generate videos from text | wan2.2, wan2.1, hunyuanvideo, etc. |
+| `/videos/{video_id}` | GET | Check video generation status | wan2.2, wan2.1, hunyuanvideo, etc. |
+| `/videos/{video_id}/content` | GET | Download generated video | wan2.2, wan2.1, hunyuanvideo, etc. |
+| `/stats` | GET | Get server statistics and monitoring data | All models |
 
 ### Interactive API Documentation
 
