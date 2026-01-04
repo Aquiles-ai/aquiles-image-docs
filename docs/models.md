@@ -47,29 +47,37 @@ Models that edit existing images with text guidance via the `/images/edits` endp
 
 #### Generated Examples
 
+<div id="imageModal" class="image-modal" onclick="document.getElementById('imageModal').style.display='none'">
+  <img class="modal-content" id="modalImage">
+</div>
+
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
   <div style="text-align: center;">
-    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555903/image_a_brown_dog_playing_in_the_park_flux2_7_2_yunwiy.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555903/image_a_brown_dog_playing_in_the_park_flux2_7_2_yunwiy.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
   </div>
   <div style="text-align: center;">
-    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555903/image_a_green_tree_in_a_beautiful_forest_flux2_2_1_ueomai.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555903/image_a_green_tree_in_a_beautiful_forest_flux2_2_1_ueomai.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
   </div>
   <div style="text-align: center;">
-    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555905/image_sc_1_eugmfx.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555905/image_sc_1_eugmfx.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
   </div>
   <div style="text-align: center;">
-    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555904/image_hr_3_ejrkgo.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555904/image_hr_3_ejrkgo.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
   </div>
   <div style="text-align: center;">
-    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555902/image_7_yoap68.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555902/image_7_yoap68.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
   </div>
   <div style="text-align: center;">
-    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555904/image_sd_6_0_kmm6dv.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555904/image_sd_6_0_kmm6dv.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
   </div>
   <div style="text-align: center;">
-    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555905/image_xd_5_0_x6c4jj.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555905/image_xd_5_0_x6c4jj.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;" onclick="document.getElementById('imageModal').style.display='block'; document.getElementById('modalImage').src=this.src">
   </div>
 </div>
+
+<p style="text-align: center; color: #888; font-size: 14px; margin-top: 10px; font-style: italic;">
+Click on any image to view in full size (click again to close)
+</p>
 
 ### Video Generation
 
