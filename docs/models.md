@@ -86,6 +86,8 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 
 #### Model Specifications
 
+> The metrics shown were taken when running the models on an NVIDIA H100.
+
 | Model | HuggingFace Link | GPU Requirement | Inference Time | End-to-End Time | Peak VRAM | Notes |
 |-------|------------------|-----------------|----------------|-----------------|-----------|-------|
 | `wan2.1-turbo-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/Wan2.1-Turbo-fp8) | <80GB VRAM | 32 seconds | 38 seconds | 30.09 GB | Fast, FP8 quantized, 4 steps |
