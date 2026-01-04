@@ -22,6 +22,8 @@ Models that generate images from text prompts via the `/images/generations` endp
 | `black-forest-labs/FLUX.2-dev` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-dev) |
 | `diffusers/FLUX.2-dev-bnb-4bit` | [🤗 Link](https://huggingface.co/diffusers/FLUX.2-dev-bnb-4bit) |
 | `Tongyi-MAI/Z-Image-Turbo` | [🤗 Link](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo) |
+| `Qwen/Qwen-Image` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image) |
+| `Qwen/Qwen-Image-2512` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-2512) |
 
 **Recommended for Modal deployment:**
 - **H100 (80GB)**: All models above
@@ -32,14 +34,42 @@ Models that generate images from text prompts via the `/images/generations` endp
 
 Models that edit existing images with text guidance via the `/images/edits` endpoint:
 
-| Model | HuggingFace Link | Notes |
-|-------|------------------|-------|
-| `black-forest-labs/FLUX.1-Kontext-dev` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev) | ⚠️ Requires `diffusers==0.36.0` |
-| `diffusers/FLUX.2-dev-bnb-4bit` | [🤗 Link](https://huggingface.co/diffusers/FLUX.2-dev-bnb-4bit) | Quantized, slower for editing |
+| Model | HuggingFace Link | Multi-Image Support | Notes |
+|-------|------------------|---------------------|-------|
+| `black-forest-labs/FLUX.1-Kontext-dev` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.1-Kontext-dev) | ❌ Single image | ⚠️ Requires `diffusers==0.36.0` |
+| `diffusers/FLUX.2-dev-bnb-4bit` | [🤗 Link](https://huggingface.co/diffusers/FLUX.2-dev-bnb-4bit) | ✅ Up to 10 images | Quantized, slower |
+| `black-forest-labs/FLUX.2-dev` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-dev) | ✅ Up to 10 images | ⚠️ Requires H200 64GB+ RAM, variable inference (17s-2min) |
+| `Qwen/Qwen-Image-Edit` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-Edit) | ❌ Single image | Qwen edit base |
+| `Qwen/Qwen-Image-Edit-2509` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-Edit-2509) | ✅ Up to 3 images | Sept 2025 variant |
+| `Qwen/Qwen-Image-Edit-2511` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-Edit-2511) | ✅ Up to 3 images | Nov 2025 variant (latest) |
 
-> ⚠️ **Important**: `FLUX.1-Kontext-dev` requires exactly `diffusers==0.36.0` to avoid errors. See configuration guide for details.
+> ⚠️ **Performance Note**: The `diffusers/FLUX.2-dev-bnb-4bit` model tends to have high inference times for image editing tasks, even when running entirely on CUDA. Consider using FLUX.1-Kontext-dev for single-image edits or Qwen models for multi-image editing.
 
-> ⚠️ **Performance Note**: The `diffusers/FLUX.2-dev-bnb-4bit` model tends to have high inference times for image editing tasks, even when running entirely on CUDA. Consider using FLUX.1-Kontext-dev for better performance.
+#### Generated Examples
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+  <div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555903/image_a_brown_dog_playing_in_the_park_flux2_7_2_yunwiy.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  </div>
+  <div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555903/image_a_green_tree_in_a_beautiful_forest_flux2_2_1_ueomai.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  </div>
+  <div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555905/image_sc_1_eugmfx.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  </div>
+  <div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555904/image_hr_3_ejrkgo.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  </div>
+  <div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555902/image_7_yoap68.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  </div>
+  <div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555904/image_sd_6_0_kmm6dv.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  </div>
+  <div style="text-align: center;">
+    <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1767555905/image_xd_5_0_x6c4jj.png" alt="Generated image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+  </div>
+</div>
 
 ### Video Generation
 
