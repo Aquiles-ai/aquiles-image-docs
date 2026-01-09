@@ -102,6 +102,7 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 | `hunyuanVideo-1.5-480p-turbo-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-480p-Turbo-fp8) | ~41GB VRAM | ⚡ 8 seconds | 20 seconds | 40.76 GB | **Ultra fast** 480p turbo FP8, 4 steps |
 | `hunyuanVideo-1.5-720p` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-720p) | ~57GB VRAM | 25 min 53 sec | 26 min 48 sec | 56.56 GB | 720p resolution, 50 steps |
 | `hunyuanVideo-1.5-720p-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-720p-fp8) | ~49GB VRAM | 25 min 50 sec | 26 min 45 sec | 48.98 GB | 720p FP8 quantized, 50 steps |
+| `ltx-2` | [🤗 Link](https://huggingface.co/Lightricks/LTX-2) | ~49GB VRAM | 2 min 10 sec | 2 min 28 sec | 45.37GB GB | Supporting synchronized audio-video generation |
 
 #### Output Examples
 
@@ -303,6 +304,22 @@ Models that generate videos from text prompts via the `/videos` endpoint:
       <td style="padding: 12px; border: 1px solid #404040;">
         <iframe 
           src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=hunyuanvideo-720p-fp8_vc3str&profile=cld-default" 
+          width="100%" 
+          height="400" 
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 
+          allowfullscreen 
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; font-size: 20px; font-weight: 500; font-family: 'Courier New', monospace; border: 1px solid #404040;">
+        ltx-2
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <iframe 
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=content_s1gnym&profile=cld-default" 
           width="100%" 
           height="400" 
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture" 

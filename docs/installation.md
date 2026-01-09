@@ -194,6 +194,8 @@ uv pip install aquiles-image
 uv pip install git+https://github.com/Aquiles-ai/Aquiles-Image.git
 ```
 
+> **Note**: If you want to use the 'ltx-2' model, we recommend checking the [`aquiles_deploy_ltx_2.py`](https://github.com/Aquiles-ai/Aquiles-Image/blob/main/example/aquiles_deploy_ltx_2.py) file so you can install all the necessary dependencies.
+
 ### Authentication for Gated Models
 
 Video generation models require Hugging Face authentication:
