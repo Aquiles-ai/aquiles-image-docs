@@ -104,6 +104,8 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 | `hunyuanVideo-1.5-720p-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-720p-fp8) | ~49GB VRAM | 25 min 50 sec | 26 min 45 sec | 48.98 GB | 720p FP8 quantized, 50 steps |
 | `ltx-2` | [🤗 Link](https://huggingface.co/Lightricks/LTX-2) | ~49GB VRAM | 2 min 10 sec | 2 min 28 sec | 45.37GB GB | Supporting synchronized audio-video generation |
 
+> **Note:** The times and resource usage presented above for the `ltx-2` model correspond to the configuration for generating a 5-second video. A change has been made so that the generation time is now 12 seconds, and the end-to-end time has increased to around 5-6 minutes with a peak VRAM usage of 58.40GB.
+
 #### Output Examples
 
 > **Generated with prompt:** A direct continuation of the existing shot of a chameleon crawling slowly along a mossy branch. 
