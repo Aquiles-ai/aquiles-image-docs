@@ -24,6 +24,8 @@ Models that generate images from text prompts via the `/images/generations` endp
 | `Tongyi-MAI/Z-Image-Turbo` | [🤗 Link](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo) |
 | `Qwen/Qwen-Image` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image) |
 | `Qwen/Qwen-Image-2512` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-2512) |
+| `black-forest-labs/FLUX.2-klein-4B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) |
+| `black-forest-labs/FLUX.2-klein-9B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-9B) |
 
 **Recommended for Modal deployment:**
 - **H100 (80GB)**: All models above
@@ -42,6 +44,8 @@ Models that edit existing images with text guidance via the `/images/edits` endp
 | `Qwen/Qwen-Image-Edit` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-Edit) | ❌ Single image | Qwen edit base |
 | `Qwen/Qwen-Image-Edit-2509` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-Edit-2509) | ✅ Up to 3 images | Sept 2025 variant |
 | `Qwen/Qwen-Image-Edit-2511` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-Edit-2511) | ✅ Up to 3 images | Nov 2025 variant (latest) |
+| `black-forest-labs/FLUX.2-klein-4B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) | ✅ Up to 10 images | ⚠️ It requires installing diffusers from the repository |
+| `black-forest-labs/FLUX.2-klein-9B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-9B) | ✅ Up to 10 images | ⚠️ It requires installing diffusers from the repository |
 
 > ⚠️ **Performance Note**: The `diffusers/FLUX.2-dev-bnb-4bit` model tends to have high inference times for image editing tasks, even when running entirely on CUDA. Consider using FLUX.1-Kontext-dev for single-image edits or Qwen models for multi-image editing.
 
