@@ -26,6 +26,8 @@ Models that generate images from text prompts via the `/images/generations` endp
 | `Qwen/Qwen-Image-2512` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-2512) |
 | `black-forest-labs/FLUX.2-klein-4B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) |
 | `black-forest-labs/FLUX.2-klein-9B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-9B) |
+| `zai-org/GLM-Image` | [🤗 Link](https://huggingface.co/zai-org/GLM-Image) |
+| `Tongyi-MAI/Z-Image` | [🤗 Link](https://huggingface.co/Tongyi-MAI/Z-Image) |
 
 **Recommended for Modal deployment:**
 - **H100 (80GB)**: All models above
@@ -46,6 +48,7 @@ Models that edit existing images with text guidance via the `/images/edits` endp
 | `Qwen/Qwen-Image-Edit-2511` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-Edit-2511) | ✅ Up to 3 images | Nov 2025 variant (latest) |
 | `black-forest-labs/FLUX.2-klein-4B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) | ✅ Up to 10 images | ⚠️ It requires installing diffusers from the repository |
 | `black-forest-labs/FLUX.2-klein-9B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-9B) | ✅ Up to 10 images | ⚠️ It requires installing diffusers from the repository |
+| `zai-org/GLM-Image` | [🤗 Link](https://huggingface.co/zai-org/GLM-Image) | ✅ Up to 5 images | ⚠️ It requires installing diffusers from the repository and it's the slowest in inference, relatively speaking |
 
 > ⚠️ **Performance Note**: The `diffusers/FLUX.2-dev-bnb-4bit` model tends to have high inference times for image editing tasks, even when running entirely on CUDA. Consider using FLUX.1-Kontext-dev for single-image edits or Qwen models for multi-image editing.
 
