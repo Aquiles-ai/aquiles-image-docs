@@ -349,21 +349,26 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 
 ## AutoPipeline Support (Experimental)
 
-Aquiles-Image supports additional models through the experimental **AutoPipeline** feature, which uses `AutoPipelineForText2Image` from Hugging Face's Diffusers library.
+Aquiles-Image supports additional models through the experimental **AutoPipeline** feature, which uses `AutoPipelineForText2Image` or `AutoPipelineForImage2Image` from Hugging Face's Diffusers library.
 
 ### Status
 
 ![Experimental](https://img.shields.io/badge/Status-Experimental-orange)
-![Requires AutoPipeline](https://img.shields.io/badge/Requires-AutoPipelineForText2Image-blue)
+![Requires AutoPipeline](https://img.shields.io/badge/Requires-AutoPipeline-blue)
 ![Slower Performance](https://img.shields.io/badge/Performance-Slower-yellow)
 
 ### What is AutoPipeline?
 
-AutoPipeline automatically detects and loads compatible diffusion models without manual configuration. This provides greater model flexibility but with performance trade-offs.
+AutoPipeline automatically detects and loads compatible diffusion models without manual configuration. This provides greater model flexibility but with performance trade-offs. Two pipeline modes are available:
+
+- **`t2i` (Text-to-Image):** Uses `AutoPipelineForText2Image`. Generates images from text prompts.
+- **`i2i` (Image-to-Image):** Uses `AutoPipelineForImage2Image`. Transforms an input image guided by a text prompt.
+
+> **Note:** The `--auto-pipeline-type` flag is required when using `--auto-pipeline`. You must explicitly choose between `t2i` and `i2i` depending on your use case.
 
 ### Compatible Models
 
-Any model that works with `AutoPipelineForText2Image` out-of-the-box, including:
+Any model that works with `AutoPipelineForText2Image` or `AutoPipelineForImage2Image` out-of-the-box, including:
 
 - `stable-diffusion-v1-5/stable-diffusion-v1-5`
 - `stabilityai/stable-diffusion-xl-base-1.0`
@@ -399,7 +404,7 @@ aquiles_image = (
 MODEL_NAME = "stabilityai/stable-diffusion-xl-base-1.0"
 ```
 
-**Update the serve function:**
+**Update the serve function (Text-to-Image):**
 
 ```python
 @app.function(
@@ -425,14 +430,31 @@ def serve():
         "--port", str(AQUILES_PORT),
         "--model", MODEL_NAME,
         "--set-steps", "30",
-        "--auto-pipeline",  # Enable AutoPipeline
+        "--auto-pipeline",           # Enable AutoPipeline
+        "--auto-pipeline-type", "t2i",  # Text-to-Image mode
         "--api-key", "dummy-api-key",
     ]
 
-    print(f"Starting Aquiles-Image with AutoPipeline model: {MODEL_NAME}")
+    print(f"Starting Aquiles-Image with AutoPipeline (t2i) model: {MODEL_NAME}")
     print(f"Command: {' '.join(cmd)}")
 
     subprocess.Popen(" ".join(cmd), shell=True)
+```
+
+**Update the serve function (Image-to-Image):**
+
+```python
+    cmd = [
+        "aquiles-image",
+        "serve",
+        "--host", "0.0.0.0",
+        "--port", str(AQUILES_PORT),
+        "--model", MODEL_NAME,
+        "--set-steps", "30",
+        "--auto-pipeline",           # Enable AutoPipeline
+        "--auto-pipeline-type", "i2i",  # Image-to-Image mode
+        "--api-key", "dummy-api-key",
+    ]
 ```
 
 ### Client Usage Example
@@ -463,7 +485,7 @@ print("Image generated successfully!")
 
 ### More Examples
 
-**Stable Diffusion v1.5:**
+**Stable Diffusion v1.5 (Text-to-Image):**
 ```bash
 # In your Modal serve function
 cmd = [
@@ -471,17 +493,32 @@ cmd = [
     "--model", "stable-diffusion-v1-5/stable-diffusion-v1-5",
     "--set-steps", "40",
     "--auto-pipeline",
+    "--auto-pipeline-type", "t2i",
     # ... other options
 ]
 ```
 
-**SDXL Base with authentication:**
+**SDXL Base with authentication (Text-to-Image):**
 ```bash
 cmd = [
     "aquiles-image", "serve",
     "--model", "stabilityai/stable-diffusion-xl-base-1.0",
     "--set-steps", "30",
     "--auto-pipeline",
+    "--auto-pipeline-type", "t2i",
+    "--api-key", "your-secret-key",
+    # ... other options
+]
+```
+
+**SDXL Base (Image-to-Image):**
+```bash
+cmd = [
+    "aquiles-image", "serve",
+    "--model", "stabilityai/stable-diffusion-xl-base-1.0",
+    "--set-steps", "30",
+    "--auto-pipeline",
+    "--auto-pipeline-type", "i2i",
     "--api-key", "your-secret-key",
     # ... other options
 ]
@@ -495,45 +532,62 @@ cmd = [
 | 🚫 **No LoRA Support** | LoRA adapters are not currently supported |
 | 🚫 **No Adapters** | ControlNet, T2I-Adapter, and other adapter types are not supported |
 | 🧪 **Experimental** | This feature is in active development and may have stability issues |
-| 📦 **Limited Configs** | Only models that work out-of-the-box with default `AutoPipelineForText2Image` settings are supported |
-| ❌ **No Image Editing** | AutoPipeline only supports text-to-image generation, not image editing |
+| 📦 **Limited Configs** | Only models that work out-of-the-box with default AutoPipeline settings are supported |
+| ⚠️ **Type Required** | `--auto-pipeline-type` must always be specified alongside `--auto-pipeline` |
 | ❌ **No Video** | Video generation is not supported with AutoPipeline |
 
 ### Troubleshooting AutoPipeline
 
-**1. Check model compatibility**
+**1. Always specify the pipeline type**
+
+`--auto-pipeline-type` is required whenever `--auto-pipeline` is used. Omitting it will cause an error:
+```bash
+# Correct
+aquiles-image serve --auto-pipeline --auto-pipeline-type t2i --model "..."
+
+# Correct
+aquiles-image serve --auto-pipeline --auto-pipeline-type i2i --model "..."
+```
+
+**2. Check model compatibility**
 
 Test locally before deploying to Modal:
 ```python
-from diffusers import AutoPipelineForText2Image
+from diffusers import AutoPipelineForText2Image, AutoPipelineForImage2Image
 
-# Test if model loads correctly
+# Test t2i
 pipe = AutoPipelineForText2Image.from_pretrained(
+    "your-model-name",
+    torch_dtype=torch.float16
+)
+
+# Test i2i
+pipe = AutoPipelineForImage2Image.from_pretrained(
     "your-model-name",
     torch_dtype=torch.float16
 )
 ```
 
-**2. Verify VRAM requirements**
+**3. Verify VRAM requirements**
 
 - Check the model card on HuggingFace for memory requirements
 - Monitor GPU usage during inference
 - Some models may need more VRAM than their native counterparts
 
-**3. Use native implementations when possible**
+**4. Use native implementations when possible**
 
 For supported models (FLUX, SD3, etc.), always use native support for better performance:
 ```python
-# ✅ Better: Native support
+# Better: Native support
 MODEL_NAME = "stabilityai/stable-diffusion-3.5-medium"
 # No --auto-pipeline flag needed
 
-# ❌ Slower: AutoPipeline
+# Slower: AutoPipeline
 MODEL_NAME = "stabilityai/stable-diffusion-xl-base-1.0"
-# Requires --auto-pipeline flag
+# Requires --auto-pipeline and --auto-pipeline-type flags
 ```
 
-**4. Check server logs**
+**5. Check server logs**
 
 Modal provides detailed logs for debugging:
 ```bash
@@ -544,14 +598,16 @@ modal app logs aquiles-image-server
 # They indicate AutoPipeline loading issues
 ```
 
-**5. Common issues**
+**6. Common issues**
 
 | Issue | Solution |
 |-------|----------|
+| Missing `--auto-pipeline-type` | Always add `--auto-pipeline-type t2i` or `--auto-pipeline-type i2i` |
 | Model won't load | Verify model exists on HuggingFace and is public or you have access |
 | Out of memory | Use a larger GPU or try a smaller model |
 | Slow inference | Expected with AutoPipeline; consider requesting native support |
 | Missing dependencies | Some models need additional packages; check model documentation |
+| Wrong pipeline type | Ensure the chosen type (`t2i`/`i2i`) matches your model's intended use |
 
 ### Requesting Native Support
 

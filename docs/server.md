@@ -46,11 +46,29 @@ This will start the server at `http://0.0.0.0:5500` and load the specified model
 - **Description:** Enable AutoPipeline for models not natively supported
 - **Example:** `--auto-pipeline`
 
+**`--auto-pipeline-type`**
+- **Default:** `None`
+- **Type:** Choice (`t2i` | `i2i`)
+- **Description:** Specifies the AutoPipeline mode. Required when using `--auto-pipeline`. Use `t2i` for Text-to-Image or `i2i` for Image-to-Image.
+- **Example:** `--auto-pipeline-type t2i`
+
 **`--device-map`**
 - **Default:** `None`
 - **Type:** String
 - **Description:** Device mapping for model loading (only compatible with `diffusers/FLUX.2-dev-bnb-4bit`)
 - **Example:** `--device-map "cuda"`
+
+**`--guidance-scale`**
+- **Default:** `None`
+- **Type:** Float
+- **Description:** Guidance scale value for image generation. Higher values make the output more closely follow the prompt, at the cost of image diversity.
+- **Example:** `--guidance-scale 7.5`
+
+**`--seed`**
+- **Default:** `None`
+- **Type:** Integer
+- **Description:** Fixed seed for reproducible image generation. When set, the same prompt will always produce the same output.
+- **Example:** `--seed 42`
 
 #### Security & Access
 
@@ -66,6 +84,20 @@ client = OpenAI(
     api_key="your-secret-key"
 )
 ```
+
+**`--username`**
+- **Default:** `None`
+- **Type:** String
+- **Description:** Username for the playground. Enables the playground interface when set together with `--password`.
+- **Example:** `--username "admin"`
+
+**`--password`**
+- **Default:** `None`
+- **Type:** String
+- **Description:** Password for the playground. Enables the playground interface when set together with `--username`.
+- **Example:** `--password "my-secure-password"`
+
+> **Note:** The playground is only enabled when **both** `--username` and `--password` are provided.
 
 #### Performance & Concurrency
 
@@ -138,6 +170,17 @@ aquiles-image serve \
   --block-request
 ```
 
+#### Production Server with Playground
+```bash
+aquiles-image serve \
+  --host "0.0.0.0" \
+  --port 5500 \
+  --model "stabilityai/stable-diffusion-3.5-medium" \
+  --api-key "prod-secret-key-2024" \
+  --username "admin" \
+  --password "my-secure-password"
+```
+
 #### Single-Device Server with Optimized Batching
 ```bash
 aquiles-image serve \
@@ -192,7 +235,16 @@ aquiles-image serve \
 aquiles-image serve \
   --model "stabilityai/stable-diffusion-xl-base-1.0" \
   --set-steps 30 \
-  --auto-pipeline
+  --auto-pipeline \
+  --auto-pipeline-type t2i
+```
+
+#### AutoPipeline Image-to-Image
+```bash
+aquiles-image serve \
+  --model "stabilityai/stable-diffusion-xl-base-1.0" \
+  --auto-pipeline \
+  --auto-pipeline-type i2i
 ```
 
 #### Quantized Model with Device Mapping
@@ -200,6 +252,14 @@ aquiles-image serve \
 aquiles-image serve \
   --model "diffusers/FLUX.2-dev-bnb-4bit" \
   --device-map "cuda"
+```
+
+#### Reproducible Generation with Fixed Seed
+```bash
+aquiles-image serve \
+  --model "stabilityai/stable-diffusion-3.5-medium" \
+  --seed 42 \
+  --guidance-scale 7.5
 ```
 
 #### Distributed Inference with Custom Batch Settings
@@ -240,6 +300,12 @@ aquiles-image serve --dist-inference
 
 # Adjust batch processing parameters (works in both single-device and distributed modes)
 aquiles-image serve --max-batch-size 12 --batch-timeout 0.8
+
+# Set a fixed seed and guidance scale
+aquiles-image serve --seed 42 --guidance-scale 7.5
+
+# Enable playground access
+aquiles-image serve --username "admin" --password "my-password"
 ```
 
 ### Verifying Server Status
@@ -307,6 +373,13 @@ aquiles-image serve --api-key "correct-key"
 # Try a smaller model or quantized version
 aquiles-image serve --model "stabilityai/stable-diffusion-3.5-medium"
 aquiles-image serve --model "diffusers/FLUX.2-dev-bnb-4bit" --device-map "cuda"
+```
+
+**AutoPipeline Type Not Set**
+```bash
+# If using --auto-pipeline, always specify the pipeline type
+aquiles-image serve --auto-pipeline --auto-pipeline-type t2i
+aquiles-image serve --auto-pipeline --auto-pipeline-type i2i
 ```
 
 **Batch Processing Performance**

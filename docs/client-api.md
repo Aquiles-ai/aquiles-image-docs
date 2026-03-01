@@ -238,6 +238,68 @@ if __name__ == "__main__":
 - The script polls the server for progress updates
 - Includes automatic retry logic for downloads
 
+#### LTX-2 Image-to-Video Generation
+
+LTX-2 supports **image input as the first frame** of the video — pass a reference image via `input_reference` to guide the visual starting point of the generation. This is in addition to its synchronized audio-video generation capability.
+
+> For best results with LTX-2, follow the [prompts guide](https://ltx.io/model/model-blog/prompting-guide-for-ltx-2) provided by the Lightricks team.
+
+> ⚠️ **Note**: The OpenAI Python client does not currently support sending images or custom fields for video generation. Use `curl` or any HTTP client that supports `multipart/form-data` for this endpoint.
+
+```bash
+curl -X POST "https://YOUR_BASE_URL_DEPLOY/videos" \
+  -H "Authorization: Bearer dummy-api-key" \
+  -H "Content-Type: multipart/form-data" \
+  -F prompt="She turns around and smiles, then slowly walks out of the frame." \
+  -F model="ltx-2" \
+  -F size="1280x720" \
+  -F seconds="8" \
+  -F input_reference="@sample_720p.jpeg;type=image/jpeg"
+```
+
+**LTX-2 image-to-video notes:**
+- The `input_reference` field accepts an image file and is used as the first frame of the generated video
+- The request must be sent as `multipart/form-data`
+- Generation time is significantly longer than standard text-to-video — see the model specs for reference timings
+- For text-only generation, simply omit the `input_reference` field
+
+#### Output Example
+
+> **Input image** used as the first frame and the resulting generated video:
+
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #2d2d2d;">
+      <th style="padding: 16px; text-align: center; font-size: 16px; font-weight: 600; border: 1px solid #404040;">Input Image (First Frame)</th>
+      <th style="padding: 16px; text-align: center; font-size: 16px; font-weight: 600; border: 1px solid #404040;">Generated Video</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="padding: 20px; text-align: center; vertical-align: middle; border: 1px solid #404040;">
+        <!-- Replace the src below with the actual input image URL -->
+        <img src="https://res.cloudinary.com/dmtomxyvm/image/upload/v1772324169/sora_woman_skyline_original_2_nthjqk.jpg" alt="Input reference image" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+      </td>
+      <td style="padding: 12px; border: 1px solid #404040;">
+        <!-- Replace public_id below with the actual Cloudinary video ID -->
+        <iframe
+          src="https://player.cloudinary.com/embed/?cloud_name=dmtomxyvm&public_id=output_ltx_2_image_bdvjml"
+          width="100%"
+          height="400"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          allowfullscreen
+          frameborder="0"
+          style="border-radius: 8px;">
+        </iframe>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="text-align: center; color: #888; font-size: 14px; margin-top: 10px; font-style: italic;">
+  Prompt: "She turns around and smiles, then slowly walks out of the frame."
+</p>
+
 
 ## 📊 Monitoring & Stats
 
@@ -639,9 +701,9 @@ For other languages, check the [OpenAI SDK documentation](https://platform.opena
 |----------|--------|---------|-------------------|
 | `/images/generations` | POST | Generate images from text | All FLUX, SD3.5, Z-Image-Turbo, etc. |
 | `/images/edits` | POST | Edit existing images | FLUX.1-Kontext-dev, FLUX.2-dev-bnb-4bit, etc. |
-| `/videos` | POST | Generate videos from text | wan2.2, wan2.1, hunyuanvideo, etc. |
-| `/videos/{video_id}` | GET | Check video generation status | wan2.2, wan2.1, hunyuanvideo, etc. |
-| `/videos/{video_id}/content` | GET | Download generated video | wan2.2, wan2.1, hunyuanvideo, etc. |
+| `/videos` | POST | Generate videos from text | wan2.2, wan2.1, hunyuanvideo, ltx-2, etc. |
+| `/videos/{video_id}` | GET | Check video generation status | wan2.2, wan2.1, hunyuanvideo, ltx-2, etc. |
+| `/videos/{video_id}/content` | GET | Download generated video | wan2.2, wan2.1, hunyuanvideo, ltx-2, etc. |
 | `/stats` | GET | Get server statistics and monitoring data | All models |
 
 ### Interactive API Documentation
