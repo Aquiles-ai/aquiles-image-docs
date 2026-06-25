@@ -140,6 +140,19 @@ client = OpenAI(
 - **Use case:** Fine-tune CPU usage and batch processing frequency
 - **Example:** `--worker-sleep 0.1`
 
+#### GGUF Registry Commands
+
+**`gguf-download`**
+- **Description:** Download a GGUF model file from the Aquiles registry to your local HuggingFace cache. Must be run before serving a `gguf:` model for the first time.
+- **Usage:** `aquiles-image gguf-download --model-id <id>`
+- **Example:** `aquiles-image gguf-download --model-id flux1-dev-q4k`
+
+**`gguf-update`**
+- **Description:** Refresh the local Aquiles GGUF registry from HuggingFace. Run this to pick up newly added GGUF models.
+- **Usage:** `aquiles-image gguf-update`
+
+> See the [GGUF documentation](gguf.md) for a full list of available model IDs, the registry format, and Modal deployment examples.
+
 #### Development Options
 
 **`--no-load-model`**
@@ -220,6 +233,19 @@ aquiles-image serve \
   --host "127.0.0.1" \
   --port 5500 \
   --no-load-model
+```
+
+#### GGUF Quantized Model
+
+```bash
+# Download first (only needed once)
+aquiles-image gguf-download --model-id flux1-dev-q4k
+
+# Serve
+aquiles-image serve \
+  --model "gguf:flux1-dev-q4k" \
+  --set-steps 30 \
+  --api-key "your-key"
 ```
 
 #### Video Generation Server

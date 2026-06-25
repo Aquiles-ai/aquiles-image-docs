@@ -47,7 +47,7 @@ Choose one of the following options:
 uv pip install diffusers
 ```
 
-**Option B: From Source (Required for FLUX.2 and Z-Image-Turbo)**
+**Option B: From Source (Required for FLUX.2, Z-Image-Turbo, and GGUF models)**
 ```bash
 uv pip install git+https://github.com/huggingface/diffusers.git
 ```
@@ -57,7 +57,7 @@ uv pip install git+https://github.com/huggingface/diffusers.git
 uv pip install diffusers==0.36.0
 ```
 
-> **Important:** If you plan to use **FLUX.2** or **Z-Image-Turbo** models, you **must** install from source (Option B).
+> **Important:** If you plan to use **FLUX.2**, **Z-Image-Turbo**, or any **GGUF quantized models**, you **must** install from source (Option B).
 
 #### 5. Install Aquiles-Image
 
@@ -72,6 +72,17 @@ uv pip install aquiles-image
 ```bash
 uv pip install git+https://github.com/Aquiles-ai/Aquiles-Image.git
 ```
+
+#### 6. (Optional) Install GGUF Support
+
+If you want to run GGUF-quantized models (e.g. `gguf:flux1-dev-q4k`), install the `gguf` package and diffusers from source:
+
+```bash
+uv pip install gguf
+uv pip install git+https://github.com/huggingface/diffusers.git
+```
+
+> The `gguf` package is already declared as a dependency of `aquiles-image`, so `pip install aquiles-image` will install it automatically. However, `diffusers` from source must still be installed explicitly — the PyPI release does not yet include `GGUFQuantizationConfig`.
 
 ### Authentication for Gated Models
 
@@ -123,6 +134,8 @@ print(f"Image downloaded successfully\n")
 - **Authentication errors**: Make sure you've logged in with `hf auth login`
 - **Model not found**: Check that the model name is correct and you have access to it
 - **Flash Attention errors**: Verify your Python version, PyTorch version, and CUDA version match the wheel requirements
+- **GGUF errors (`GGUFQuantizationConfig` not found)**: Install diffusers from source — `uv pip install git+https://github.com/huggingface/diffusers.git`
+- **GGUF model not in registry**: Run `aquiles-image gguf-update` then retry `gguf-download`
 
 
 ## Installation for Video Generation

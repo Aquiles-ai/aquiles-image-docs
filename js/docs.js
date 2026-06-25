@@ -7,12 +7,13 @@ const routes = {
     '#dev-mode': 'docs/dev-mode.md',
     '#modal-deployment': 'docs/modal-deployment.md',
     '#client-api': 'docs/client-api.md',
-    '#models': 'docs/models.md'
+    '#models': 'docs/models.md',
+    '#gguf': 'docs/gguf.md'
 };
 
 
 const routeOrder = [
-    '#introduction', '#installation', '#server', '#dev-mode', '#modal-deployment', '#client-api', '#models'
+    '#introduction', '#installation', '#server', '#dev-mode', '#modal-deployment', '#client-api', '#models', '#gguf'
 ];
 const routeTitles = {
     '#introduction': 'Introduction',
@@ -21,7 +22,8 @@ const routeTitles = {
     '#dev-mode': 'Dev Mode',
     '#modal-deployment': 'Modal Deployment',
     '#client-api': 'Python Client',
-    '#models': 'Supported Models'
+    '#models': 'Supported Models',
+    '#gguf': 'GGUF Model Support'
 };
 
 // Sidebar Structure
@@ -37,7 +39,8 @@ const navStructure = [
     ]},
     { title: 'API Reference', items: [
         { label: 'Python Client', hash: '#client-api' },
-        { label: 'Supported Models', hash: '#models' }
+        { label: 'Supported Models', hash: '#models' },
+        { label: 'GGUF Model Support', hash: '#gguf' }
     ]}
 ];
 

@@ -21,14 +21,28 @@ Models that generate images from text prompts via the `/images/generations` endp
 | `black-forest-labs/FLUX.1-Krea-dev` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.1-Krea-dev) |
 | `black-forest-labs/FLUX.2-dev` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-dev) |
 | `diffusers/FLUX.2-dev-bnb-4bit` | [🤗 Link](https://huggingface.co/diffusers/FLUX.2-dev-bnb-4bit) |
-| `Tongyi-MAI/Z-Image-Turbo` | [🤗 Link](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo) |
-| `Qwen/Qwen-Image` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image) |
-| `Qwen/Qwen-Image-2512` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-2512) |
 | `black-forest-labs/FLUX.2-klein-4B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-4B) |
 | `black-forest-labs/FLUX.2-klein-9B` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-9B) |
-| `zai-org/GLM-Image` | [🤗 Link](https://huggingface.co/zai-org/GLM-Image) |
-| `Tongyi-MAI/Z-Image` | [🤗 Link](https://huggingface.co/Tongyi-MAI/Z-Image) |
 | `black-forest-labs/FLUX.2-klein-9b-kv` | [🤗 Link](https://huggingface.co/black-forest-labs/FLUX.2-klein-9b-kv) |
+| `krea/Krea-2-Raw` | [🤗 Link](https://huggingface.co/krea/Krea-2-Raw) |
+| `krea/Krea-2-Turbo` | [🤗 Link](https://huggingface.co/krea/Krea-2-Turbo) |
+| `krea/Krea-2-LoRA-retroanime` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-retroanime) |
+| `krea/Krea-2-LoRA-sunsetblur` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-sunsetblur) |
+| `krea/Krea-2-LoRA-vintagetarot` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-vintagetarot) |
+| `krea/Krea-2-LoRA-rainywindow` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-rainywindow) |
+| `krea/Krea-2-LoRA-darkbrush` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-darkbrush) |
+| `krea/Krea-2-LoRA-dotmatrix` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-dotmatrix) |
+| `krea/Krea-2-LoRA-kidsdrawing` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-kidsdrawing) |
+| `krea/Krea-2-LoRA-softwatercolor` | [🤗 Link](https://huggingface.co/krea/Krea-2-LoRA-softwatercolor) |
+| `ideogram-ai/ideogram-4-nf4-diffusers` | [🤗 Link](https://huggingface.co/ideogram-ai/ideogram-4-nf4-diffusers) |
+| `Qwen/Qwen-Image` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image) |
+| `Qwen/Qwen-Image-2512` | [🤗 Link](https://huggingface.co/Qwen/Qwen-Image-2512) |
+| `Tongyi-MAI/Z-Image-Turbo` | [🤗 Link](https://huggingface.co/Tongyi-MAI/Z-Image-Turbo) |
+| `Tongyi-MAI/Z-Image` | [🤗 Link](https://huggingface.co/Tongyi-MAI/Z-Image) |
+| `baidu/ERNIE-Image` | [🤗 Link](https://huggingface.co/baidu/ERNIE-Image) |
+| `baidu/ERNIE-Image-Turbo` | [🤗 Link](https://huggingface.co/baidu/ERNIE-Image-Turbo) |
+| `NucleusAI/Nucleus-Image` | [🤗 Link](https://huggingface.co/NucleusAI/Nucleus-Image) |
+| `zai-org/GLM-Image` | [🤗 Link](https://huggingface.co/zai-org/GLM-Image) |
 
 **Recommended for Modal deployment:**
 - **H100 (80GB)**: All models above
@@ -348,6 +362,37 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 - Generation time varies by model (see table above)
 - Uses polling API for status updates
 - Both models produce equivalent quality output
+
+## GGUF Quantized Models
+
+Aquiles-Image supports running GGUF-quantized diffusion models through a registry-based system. GGUF quantization reduces VRAM requirements while keeping generation quality close to the full-precision model.
+
+Models are referenced with the `gguf:` prefix:
+
+```bash
+aquiles-image serve --model "gguf:flux1-dev-q4k"
+```
+
+### Available GGUF Models
+
+| Model ID | Base Model | Quantization | GGUF Repo |
+|----------|------------|--------------|-----------|
+| `flux1-dev-q4k` | `black-forest-labs/FLUX.1-dev` | Q4_0 | [city96/FLUX.1-dev-gguf](https://huggingface.co/city96/FLUX.1-dev-gguf) |
+| `flux1-dev-q4-1` | `black-forest-labs/FLUX.1-dev` | Q4_1 | [city96/FLUX.1-dev-gguf](https://huggingface.co/city96/FLUX.1-dev-gguf) |
+
+Download a model before serving it:
+
+```bash
+aquiles-image gguf-download --model-id flux1-dev-q4k
+```
+
+Update the local registry to pick up newly added models:
+
+```bash
+aquiles-image gguf-update
+```
+
+For full setup instructions, CLI reference, and Modal deployment examples, see the [GGUF documentation](gguf.md).
 
 ## AutoPipeline Support (Experimental)
 

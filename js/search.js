@@ -12,6 +12,7 @@ const searchIndex = [
     { title: "Modal Deployment", hash: "#modal-deployment", category: "Guides", snippet: "Deploy serverless GPU inference on Modal." },
     { title: "Python Client", hash: "#client-api", category: "API", snippet: "OpenAI compatible client usage example." },
     { title: "Supported Models", hash: "#models", category: "API", snippet: "Stable Diffusion 3.5, FLUX, VRAM usage." },
+    { title: "GGUF Model Support", hash: "#gguf", category: "API", snippet: "GGUF-quantized diffusion models." },
 ];
 
 function handleSearch(query) {
