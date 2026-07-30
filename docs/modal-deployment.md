@@ -499,13 +499,13 @@ modal secret create huggingface-secret HF_TOKEN=hf_your_new_token
 )
 ```
 
-## Video Generation with wan2.2 and wan2.2-turbo
+## Video Generation (wan2.2, wan2.2-turbo, HunyuanVideo, LTX-2, LTX-2.3)
 
-> ⚠️ **High Inference Times & Costs**: Video generation has significantly longer inference times compared to image generation. The **wan2.2** model takes ~30 minutes per video (40 steps), while **wan2.2-turbo** takes ~3 minutes (4 steps) with equivalent quality. Both models require **NVIDIA H100/A100-80GB GPUs minimum** and will incur substantial compute costs. Monitor your usage carefully and consider longer scale-down windows to avoid frequent cold starts.
+> ⚠️ **High Inference Times & Costs**: Video generation has significantly longer inference times compared to image generation. The **wan2.2** model takes ~30 minutes per video (40 steps), while **wan2.2-turbo** takes ~3 minutes (4 steps) with equivalent quality. All video models require **NVIDIA H100/A100-80GB GPUs minimum** and will incur substantial compute costs. Monitor your usage carefully and consider longer scale-down windows to avoid frequent cold starts.
 
 ### Overview
 
-The wan2.2 family of models enables text-to-video generation through Aquiles-Image. Unlike image generation which completes in seconds, video generation is a compute-intensive process with two model options:
+Aquiles-Image supports multiple video generation model families. Each has different strengths and infrastructure requirements. The table below compares the Wan2.2 variants; see the [models documentation](models.md) for the full list including HunyuanVideo, LTX-2, and LTX-2.3.
 
 | Model | Inference Time | Steps | Quality | Best For |
 |-------|----------------|-------|---------|----------|

@@ -86,10 +86,18 @@ print("Image edited successfully!")
 ```
 
 **Available models for editing:**
-- `black-forest-labs/FLUX.1-Kontext-dev` (recommended)
+- `black-forest-labs/FLUX.1-Kontext-dev` (recommended for single-image edits)
 - `diffusers/FLUX.2-dev-bnb-4bit`
+- `black-forest-labs/FLUX.2-dev`
+- `black-forest-labs/FLUX.2-klein-4B`
+- `black-forest-labs/FLUX.2-klein-9B`
+- `black-forest-labs/FLUX.2-klein-9b-kv`
+- `Qwen/Qwen-Image-Edit`
+- `Qwen/Qwen-Image-Edit-2509`
+- `Qwen/Qwen-Image-Edit-2511`
+- `zai-org/GLM-Image`
 
-> ⚠️ **Note**: Remember to use `diffusers==0.36.0` for FLUX.1-Kontext-dev to avoid errors.
+> ⚠️ **Note**: Remember to use `diffusers==0.36.0` for FLUX.1-Kontext-dev to avoid errors. Multi-image editing (up to 10 images) is supported by FLUX.2-dev, FLUX.2-klein variants, and FLUX.2-dev-bnb-4bit. Qwen-Image-Edit-2509 and Qwen-Image-Edit-2511 support up to 3 images.
 
 #### Video Generation
 
@@ -701,9 +709,11 @@ For other languages, check the [OpenAI SDK documentation](https://platform.opena
 |----------|--------|---------|-------------------|
 | `/images/generations` | POST | Generate images from text | All FLUX, SD3.5, Z-Image-Turbo, etc. |
 | `/images/edits` | POST | Edit existing images | FLUX.1-Kontext-dev, FLUX.2-dev-bnb-4bit, etc. |
-| `/videos` | POST | Generate videos from text | wan2.2, wan2.1, hunyuanvideo, ltx-2, etc. |
-| `/videos/{video_id}` | GET | Check video generation status | wan2.2, wan2.1, hunyuanvideo, ltx-2, etc. |
-| `/videos/{video_id}/content` | GET | Download generated video | wan2.2, wan2.1, hunyuanvideo, ltx-2, etc. |
+| `/videos` | POST | Create a new video generation task | wan2.2, wan2.1, hunyuanvideo, ltx-2, ltx-2.3, etc. |
+| `/videos` | GET | List all video generation tasks | wan2.2, wan2.1, hunyuanvideo, ltx-2, ltx-2.3, etc. |
+| `/videos/{video_id}` | GET | Check video generation status | wan2.2, wan2.1, hunyuanvideo, ltx-2, ltx-2.3, etc. |
+| `/videos/{video_id}` | DELETE | Delete a video generation task | wan2.2, wan2.1, hunyuanvideo, ltx-2, ltx-2.3, etc. |
+| `/videos/{video_id}/content` | GET | Download generated video | wan2.2, wan2.1, hunyuanvideo, ltx-2, ltx-2.3, etc. |
 | `/stats` | GET | Get server statistics and monitoring data | All models |
 
 ### Interactive API Documentation

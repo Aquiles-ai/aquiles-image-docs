@@ -70,7 +70,25 @@ This will start the server at `http://0.0.0.0:5500` and load the specified model
 - **Description:** Fixed seed for reproducible image generation. When set, the same prompt will always produce the same output.
 - **Example:** `--seed 42`
 
-#### Security & Access
+**`--load-lora / --no-load-lora`**
+- **Default:** `None`
+- **Type:** Flag
+- **Description:** Enable LoRA adapter loading at startup. Must be paired with `--lora-config` pointing to a JSON file describing the LoRA weights.
+- **Use case:** Apply fine-tuned styles or concepts to any supported base model.
+- **Example:** `--load-lora`
+
+**`--lora-config`**
+- **Default:** `None`
+- **Type:** String (file path)
+- **Description:** Path to a JSON file containing LoRA configuration (repo_id, weight_name, adapter_name, scale). Required when `--load-lora` is set.
+- **Example:** `--lora-config "./lora_config.json"`
+
+**`--mode`**
+- **Default:** `eager`
+- **Type:** Choice (`eager` | `piecewise`)
+- **Description:** Compilation strategy for the model. `eager` runs the standard PyTorch pipeline. `piecewise` enables per-shape warmup compilation (HyperKernels) on FLUX models via `torch.compile`, improving throughput after an initial warmup phase.
+- **Use case:** Use `piecewise` for FLUX models in production to get optimized inference after the first few requests.
+- **Example:** `--mode piecewise`
 
 **`--api-key`**
 - **Default:** No authentication
@@ -102,14 +120,15 @@ client = OpenAI(
 #### Performance & Concurrency
 
 **`--max-concurrent-infer`**
-- **Default:** 10
+- **Default:** 50
 - **Type:** Integer
 - **Description:** Maximum number of concurrent inference requests
 - **Example:** `--max-concurrent-infer 3`
 
 **`--block-request / --no-block-request`**
-- **Default:** `None`
-- **Description:** Block new requests when max concurrent inferences is reached
+- **Default:** `False`
+- **Type:** Flag
+- **Description:** Block new requests when max concurrent inferences is reached instead of queueing them
 - **Example:** `--block-request`
 
 **`--dist-inference / --no-dist-inference`**
@@ -271,6 +290,24 @@ aquiles-image serve \
   --model "stabilityai/stable-diffusion-xl-base-1.0" \
   --auto-pipeline \
   --auto-pipeline-type i2i
+```
+
+#### LoRA Adapter Loading
+```bash
+# Create a LoRA config file first, then serve with it
+aquiles-image serve \
+  --model "black-forest-labs/FLUX.1-dev" \
+  --load-lora \
+  --lora-config "./lora_config.json"
+```
+
+#### HyperKernels (Piecewise Compilation)
+```bash
+# Enables per-shape torch.compile warmup for FLUX models
+aquiles-image serve \
+  --model "black-forest-labs/FLUX.1-dev" \
+  --mode piecewise \
+  --set-steps 30
 ```
 
 #### Quantized Model with Device Mapping

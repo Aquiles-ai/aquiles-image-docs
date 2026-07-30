@@ -186,14 +186,27 @@ uv pip install git+https://github.com/huggingface/diffusers.git
 
 #### 5. Install LightX2V
 
-LightX2V is required for video generation and must be installed from source:
+LightX2V is required for Wan2.x and HunyuanVideo pipelines and must be installed from source:
+
 ```bash
 uv pip install git+https://github.com/ModelTC/LightX2V.git
 ```
 
 > **Note:** LightX2V is not available on PyPI and must be installed from the GitHub repository.
 
-#### 6. Install Aquiles-Image
+#### 6. Install LTX-2 / LTX-2.3 Dependencies (Optional)
+
+Only needed if you plan to use LTX-2 or LTX-2.3 models. These require custom pipeline packages:
+
+```bash
+uv pip install git+https://github.com/FredyRivera-dev/LTX-2.git#subdirectory=packages/ltx-core
+uv pip install git+https://github.com/FredyRivera-dev/LTX-2.git#subdirectory=packages/ltx-pipelines
+uv pip install av bitsandbytes accelerate
+```
+
+> **Note:** Check the [`aquiles_deploy_ltx_2.py`](https://github.com/Aquiles-ai/Aquiles-Image/blob/main/example/aquiles_deploy_ltx_2.py) and [`aquiles_deploy_ltx_2_3.py`](https://github.com/Aquiles-ai/Aquiles-Image/blob/main/example/aquiles_deploy_ltx_2_3.py) example files for the full dependency list.
+
+#### 7. Install Aquiles-Image
 
 Choose one of the following options:
 
@@ -206,8 +219,6 @@ uv pip install aquiles-image
 ```bash
 uv pip install git+https://github.com/Aquiles-ai/Aquiles-Image.git
 ```
-
-> **Note**: If you want to use the 'ltx-2' model, we recommend checking the [`aquiles_deploy_ltx_2.py`](https://github.com/Aquiles-ai/Aquiles-Image/blob/main/example/aquiles_deploy_ltx_2.py) file so you can install all the necessary dependencies.
 
 ### Authentication for Gated Models
 
@@ -252,5 +263,6 @@ print("Video generation started:", video)
 
 - **Out of memory**: Verify your GPU has at least 80GB VRAM
 - **Flash Attention errors**: Flash Attention is mandatory for video generation
-- **LightX2V import errors**: Ensure it was installed from source correctly
+- **LightX2V import errors**: Ensure it was installed from source correctly - `uv pip install git+https://github.com/ModelTC/LightX2V.git`
+- **LTX-2/LTX-2.3 import errors**: Ensure the LTX custom packages are installed from the correct GitHub repository
 - **Slow inference**: Video generation is computationally intensive; 5+ minutes is expected

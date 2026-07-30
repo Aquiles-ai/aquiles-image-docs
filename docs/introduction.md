@@ -18,7 +18,7 @@ Aquiles-Image is a production-ready API server that brings state-of-the-art imag
 
 - **🔌 OpenAI Compatible** - Use the official OpenAI client with zero code changes
 - **⚡ Intelligent Batching** - Automatic request grouping by shared parameters for maximum throughput on single or multi-GPU setups
-- **🎨 30+ Optimized Models** - 18 image (FLUX, SD3.5, Qwen) + 12 video models (Wan2.x, HunyuanVideo) + unlimited via AutoPipeline (Only T2I)
+- **🎨 49 Optimized Models** - 35 image (FLUX, SD3.5, Qwen, Krea-2, Ideogram-4, ERNIE, Nucleus, GLM, Z-Image) + 14 video models (Wan2.x, HunyuanVideo, LTX-2, LTX-2.3) + unlimited via AutoPipeline (Only T2I)
 - **🚀 Multi-GPU Support** - Distributed inference with dynamic load balancing across GPUs (image models) for horizontal scaling
 - **🛠️ Superior DevX** - Simple CLI, dev mode for testing, built-in monitoring
 - **🎬 Advanced Video** - Text-to-video with Wan2.x and HunyuanVideo series (+ Turbo variants)

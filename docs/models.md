@@ -1,6 +1,6 @@
 # Supported Models
 
-Aquiles-Image supports a wide range of state-of-the-art diffusion models for image generation, editing, and video creation. All models are optimized for production use with fast inference times.
+Aquiles-Image supports a wide range of state-of-the-art diffusion models for image generation, editing, and video creation. All models are optimized for production use with fast inference times. The project currently ships with 35 image models (text-to-image, image-to-image, and editing) and 14 video models, totaling 49 optimized models.
 
 ## Native Support Models
 
@@ -126,8 +126,9 @@ Models that generate videos from text prompts via the `/videos` endpoint:
 | `hunyuanVideo-1.5-720p` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-720p) | ~57GB VRAM | 25 min 53 sec | 26 min 48 sec | 56.56 GB | 720p resolution, 50 steps |
 | `hunyuanVideo-1.5-720p-fp8` | [🤗 Link](https://huggingface.co/Aquiles-ai/HunyuanVideo-1.5-720p-fp8) | ~49GB VRAM | 25 min 50 sec | 26 min 45 sec | 48.98 GB | 720p FP8 quantized, 50 steps |
 | `ltx-2` | [🤗 Link](https://huggingface.co/Lightricks/LTX-2) | ~49GB VRAM | 2 min 10 sec | 2 min 28 sec | 45.37GB GB | Supporting synchronized audio-video generation |
+| `ltx-2.3` | [🤗 Link](https://huggingface.co/Lightricks/LTX-2.3) | ~58GB VRAM | 5-6 min | 6-7 min | 58.40 GB | Latest LTX generation with synchronized audio-video |
 
-> **Note:** The times and resource usage presented above for the `ltx-2` model correspond to the configuration for generating a 5-second video. A change has been made so that the generation time is now 12 seconds, and the end-to-end time has increased to around 5-6 minutes with a peak VRAM usage of 58.40GB.
+> **Note:** The times and resource usage presented above for the `ltx-2` model correspond to the configuration for generating a 5-second video. A change has been made so that the generation time is now 12 seconds, and the end-to-end time has increased to around 5-6 minutes with a peak VRAM usage of 58.40GB. Both LTX-2 and LTX-2.3 support image input as the first frame via the `input_reference` field.
 
 #### Output Examples
 
